@@ -1,0 +1,62 @@
+<!-- index.hbs -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Currency Exchange</title>
+</head>
+<body>
+  <h1>Currency Exchange</h1>
+  <label for="currency">Select Base Currency:</label>
+  <select id="currency" name="currency">
+    <!-- Veritabanından para birimlerini doldurmak için JavaScript kodu -->
+  </select>
+  <button id="search-button">Search</button>
+  <div id="result"></div>
+  <script>
+    const searchButton = document.getElementById('search-button');
+    const currencyDropdown = document.getElementById('currency');
+    const resultDiv = document.getElementById('result');
+    // Para birimlerini dolduran fonksiyon
+    async function populateCurrencies() {
+      try {
+        const response = await fetch('/admin');
+        if (response.ok) {
+          const currencies = await response.json();
+          currencies.forEach((currency) => {
+            const option = document.createElement('option');
+            option.value = currency;
+            option.text = currency;
+            currencyDropdown.appendChild(option);
+          });
+        } else {
+          console.error('Hata: Para birimleri alınamadı');
+        }
+      } catch (error) {
+        console.error('Hata:', error.message);
+      }
+    }
+    // Sayfa yüklendiğinde para birimlerini doldur
+    populateCurrencies(); 
+    async function handleSearch() {
+    const selectedCurrency = currencyDropdown.value;
+    console.log('Seçilen Para Birimi:', selectedCurrency);
+    const response = await fetch(`/index/degerBul/${selectedCurrency}`)
+    if (response.ok) {
+      const result = await response.json();
+      console.log(result);
+      //Verileri liste şeklinde oluşturarak "resultDiv" içine ekleyelim
+      const resultList = document.createElement('ul');
+      result.forEach((item) => {
+        const listItem = document.createElement('li');
+        listItem.textContent = `${item.targetCurrency}: ${item.rate}`;
+        resultList.appendChild(listItem);
+        // Daha önceki içeriği temizleyelim ve yeni listeyi ekleyelim
+        resultDiv.innerHTML = '';
+        resultDiv.appendChild(resultList);
+        });
+    }
+  }
+  searchButton.addEventListener('click', handleSearch); // Butona tıklandığında handleSearch fonksiyonunu çağır
+  </script>
+</body>
+</html>

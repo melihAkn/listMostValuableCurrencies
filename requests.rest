@@ -1,0 +1,12 @@
+@BASE_URL =http://localhost:3000
+###
+GET {{BASE_URL}}/index/degerBul/AED
+
+
+ 
+###
+GET {{BASE_URL}}/admin/getirEkle
+
+
+###
+GET {{BASE_URL}}/admin/
