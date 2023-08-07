@@ -1,7 +1,4 @@
 const currencyModel = require('../models/ratesModel');
-
-
-
 const degerBul = async (req,res,next) => {
     const baseCurrency = req.params.baseCurrency;
     console.log(baseCurrency)
@@ -23,16 +20,11 @@ const degerBul = async (req,res,next) => {
     const elapsedTime = (endTime - startTime) /1000;
     console.log(elapsedTime.toFixed(2));
     res.send(findBigValue);
- 
-
 };
 const index = (req,res) => {
-
     res.render('index');
 }
-
 module.exports = {
     degerBul,
     index,
 }
-
