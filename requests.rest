@@ -10,6 +10,3 @@ GET {{BASE_URL}}/admin/getirEkle
 
 ###
 GET {{BASE_URL}}/admin/
-
-###
-GET {{BASE_URL}}/admin/getData
