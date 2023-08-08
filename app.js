@@ -34,6 +34,6 @@ exchangeApp.set('views', path.join(__dirname, 'views'));
 
 
 exchangeApp.listen(3000, () => {
-  console.log('Sunucu çalışıyor...');
+  console.log('Sunucu çalişiyor...');
   
 });
